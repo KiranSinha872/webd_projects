@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Book - Library Management System</title>
+</head>
+<body>
+    <h1>Search Book</h1>
+    
+    <form action="/books/search" method="GET">
+        <p>
+            <label for="query">Search Query (Name, Author, or Category):</label><br>
+            <input type="text" id="query" name="query" value="<%= typeof query !== 'undefined' ? query : '' %>" required>
+        </p>
+        <p>
+            <button type="submit">Search</button>
+        </p>
+    </form>
+    
+    <% if (typeof results !== 'undefined') { %>
+        <hr>
+        <h2>Search Results for "<%= query %>"</h2>
+        <% if (results.length > 0) { %>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% results.forEach(function(book) { %>
+                        <tr>
+                            <td><%= book.name %></td>
+                            <td><%= book.author %></td>
+                            <td><%= book.category || 'N/A' %></td>
+                            <td><%= book.price %></td>
+                            <td><%= book.quantity %></td>
+                            <td>
+                                <a href="/books/update/<%= book._id %>">Update</a>
+                                <br><br>
+                                <form action="/books/delete" method="POST">
+                                    <input type="hidden" name="id" value="<%= book._id %>">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No books match your search query.</p>
+        <% } %>
+    <% } %>
+    
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>

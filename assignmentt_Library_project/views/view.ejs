@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View All Books - Library Management System</title>
+</head>
+<body>
+    <h1>All Books</h1>
+    
+    <% if (books && books.length > 0) { %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% books.forEach(function(book) { %>
+                    <tr>
+                        <td><%= book.name %></td>
+                        <td><%= book.author %></td>
+                        <td><%= book.category || 'N/A' %></td>
+                        <td><%= book.price %></td>
+                        <td><%= book.quantity %></td>
+                        <td>
+                            <a href="/books/update/<%= book._id %>">Update</a>
+                            <br><br>
+                            <form action="/books/delete" method="POST">
+                                <input type="hidden" name="id" value="<%= book._id %>">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No books found in the library.</p>
+    <% } %>
+    
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>

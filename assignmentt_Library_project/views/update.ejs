@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Book - Library Management System</title>
+</head>
+<body>
+    <h1>Update Book</h1>
+    
+    <% if (typeof book !== 'undefined' && book) { %>
+        <h3>Updating: <%= book.name %></h3>
+        <form action="/books/update" method="POST">
+            <input type="hidden" name="id" value="<%= book._id %>">
+            <p>
+                <label for="name">Book Name:</label><br>
+                <input type="text" id="name" name="name" value="<%= book.name %>" required>
+            </p>
+            <p>
+                <label for="author">Author:</label><br>
+                <input type="text" id="author" name="author" value="<%= book.author %>" required>
+            </p>
+            <p>
+                <label for="category">Category:</label><br>
+                <input type="text" id="category" name="category" value="<%= book.category %>">
+            </p>
+            <p>
+                <label for="price">Price:</label><br>
+                <input type="number" id="price" name="price" step="0.01" value="<%= book.price %>" required>
+            </p>
+            <p>
+                <label for="quantity">Quantity:</label><br>
+                <input type="number" id="quantity" name="quantity" value="<%= book.quantity %>" required>
+            </p>
+            <p>
+                <button type="submit">Update Book</button>
+            </p>
+        </form>
+    <% } else { %>
+        <h3>Select a Book to Update</h3>
+        <% if (books && books.length > 0) { %>
+            <ul>
+                <% books.forEach(function(b) { %>
+                    <li>
+                        <strong><%= b.name %></strong> by <%= b.author %>
+                        - <a href="/books/update/<%= b._id %>">Select to Update</a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No books available to update.</p>
+        <% } %>
+    <% } %>
+    
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>

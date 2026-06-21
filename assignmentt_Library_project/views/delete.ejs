@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Book - Library Management System</title>
+</head>
+<body>
+    <h1>Delete Book</h1>
+    
+    <h3>Option 1: Delete by Book Name</h3>
+    <form action="/books/delete" method="POST">
+        <p>
+            <label for="name">Book Name:</label><br>
+            <input type="text" id="name" name="name" required>
+        </p>
+        <p>
+            <button type="submit">Delete Book</button>
+        </p>
+    </form>
+    
+    <hr>
+    
+    <h3>Option 2: Select from List</h3>
+    <% if (books && books.length > 0) { %>
+        <ul>
+            <% books.forEach(function(book) { %>
+                <li>
+                    <strong><%= book.name %></strong> by <%= book.author %>
+                    <form action="/books/delete" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<%= book._id %>">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No books available to delete.</p>
+    <% } %>
+    
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>
