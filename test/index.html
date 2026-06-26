@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Typing App</title>
+</head>
+<body>
+  <h2>Live Collaborative Text</h2>
+  <textarea id="myBox" rows="10" cols="50" placeholder="Start typing..."></textarea>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io(); // Connects to your server
+    const textBox = document.getElementById('myBox');
+
+    // 1. WHEN YOU TYPE: Send the text to the server
+    textBox.addEventListener('input', () => {
+      socket.emit('text-change', textBox.value);
+    });
+
+    // 2. WHEN SOMEONE ELSE TYPES: Update your box with their text
+    socket.on('update-text', (incomingText) => {
+      textBox.value = incomingText;
+    });
+  </script>
+</body>
+</html>

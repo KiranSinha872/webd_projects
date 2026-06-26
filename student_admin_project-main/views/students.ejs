@@ -1,0 +1,147 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            border:2px solid black;
+            background-color: antiquewhite;
+            margin:5px
+        }
+    </style>
+</head>
+<body>
+    <h1>students data profile</h1>
+    <a href="/">back to home</a>
+   <div class="container">
+   <% allstudent.forEach((element)=>{ %>
+      <h1> <%= element.name  %> </h1>
+      <h1> <%= element.age  %> </h1>
+      <h1> <%= element.course  %> </h1>
+      <h1> <%= element.email %> </h1>
+
+      <a href="/edit/<%=element._id %>"> id se edit</a>
+      <a href="/delete/<%=element._id %>"> id se delete</a>
+
+<hr>
+   <% }) %>
+
+   </div>
+   </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f5f5f5;
+            padding:30px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        .home{
+            display:inline-block;
+            margin-bottom:20px;
+            text-decoration:none;
+            background:#333;
+            color:white;
+            padding:10px 18px;
+            border-radius:6px;
+        }
+
+        .container{
+            max-width:900px;
+            margin:auto;
+        }
+
+        .card{
+            background:white;
+            border-radius:10px;
+            padding:20px;
+            margin-bottom:20px;
+            box-shadow:0 3px 8px rgba(0,0,0,.15);
+        }
+
+        .card p{
+            margin:10px 0;
+            font-size:18px;
+        }
+
+        .actions{
+            margin-top:15px;
+        }
+
+        .actions a{
+            text-decoration:none;
+            color:white;
+            padding:8px 15px;
+            border-radius:5px;
+            margin-right:10px;
+        }
+
+        .edit{
+            background:#0d6efd;
+        }
+
+        .delete{
+            background:#dc3545;
+        }
+
+        .actions a:hover{
+            opacity:.8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Students Data Profile</h1>
+
+    <a href="/" class="home">🏠 Back to Home</a>
+
+    <div class="container">
+
+        <% allstudent.forEach((element)=>{ %>
+
+        <div class="card">
+
+            <p><strong>Name:</strong> <%= element.name %></p>
+
+            <p><strong>Age:</strong> <%= element.age %></p>
+
+            <p><strong>Course:</strong> <%= element.course %></p>
+
+            <p><strong>Email:</strong> <%= element.email %></p>
+
+            <div class="actions">
+                <a href="/edit/<%= element._id %>" class="edit">Edit</a>
+
+                <a href="/delete/<%= element._id %>" class="delete">Delete</a>
+            </div>
+
+        </div>
+
+        <% }) %>
+
+    </div>
+
+</body>
+</html>
